@@ -1,0 +1,17 @@
+@use 'sass:map'; //map-get()を使うために読み込む
+
+//マップ型変数breakpointsを定義
+$breakpoints: (
+//キー　　値
+  'sp': 'not screen and (min-width: 768px)', //767px以下（スマホ）用の表示
+  'pc': 'screen and (min-width: 768px)' //768px以上（タブレット・PC）用の表示
+) !default;
+
+//メディアクエリ用のmixinを定義。デフォルト値はsp
+@mixin mq($breakpoint: pc) {
+//map-get(マップ型変数, キー)で値を取得
+  @media #{map.get($breakpoints, $breakpoint)} {
+    //この中をカスタムできる
+    @content;
+  }
+}
